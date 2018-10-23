@@ -4,6 +4,7 @@
 
 extern crate rocket;
 extern crate rocket_contrib;
+extern crate rocket_cors;
 
 extern crate asta_jobboerse_api;
 extern crate diesel;
@@ -15,18 +16,38 @@ use diesel::{
     prelude::*,
     r2d2::{ConnectionManager, Pool},
 };
-use rocket::State;
+use rocket::{http::Method, State};
 use rocket_contrib::Json;
+use rocket_cors::{AllowedHeaders, AllowedOrigins};
+
+type ConnectionPool = Pool<ConnectionManager<MysqlConnection>>;
 
 fn main() {
     let pool = init_connection_pool();
     rocket::ignite()
         .mount("/", routes![get_posts, get_post])
         .manage(pool)
+        .attach(cors())
         .launch();
 }
 
-type ConnectionPool = Pool<ConnectionManager<MysqlConnection>>;
+fn cors() -> rocket_cors::Cors {
+    rocket_cors::Cors {
+        allowed_origins: AllowedOrigins::all(),
+        allowed_methods: vec![Method::Get, Method::Post, Method::Delete, Method::Put]
+            .into_iter()
+            .map(From::from)
+            .collect(),
+        allowed_headers: AllowedHeaders::some(&[
+            "Authorization",
+            "Accept",
+            "X-Api-Key",
+            "Content-Type",
+        ]),
+        allow_credentials: true,
+        ..Default::default()
+    }
+}
 
 #[get("/")]
 fn get_posts(state: State<ConnectionPool>) -> Json<Vec<PostResponse>> {
@@ -46,13 +67,13 @@ fn get_posts(state: State<ConnectionPool>) -> Json<Vec<PostResponse>> {
 
 #[get("/<post_id>")]
 fn get_post(state: State<ConnectionPool>, post_id: u32) -> Option<Json<PostResponse>> {
-        wp_posts::table
-            .select(wp_posts::all_columns)
-            .filter(wp_posts::post_type.eq("job_listing"))
-            .filter(wp_posts::post_status.eq("publish"))
-            .filter(wp_posts::ID.eq(post_id))
-            .first(&state.get().unwrap())
-            .optional()
-            .unwrap()
-            .map(|post: Post| Json(PostResponse::from(&post)))
+    wp_posts::table
+        .select(wp_posts::all_columns)
+        .filter(wp_posts::post_type.eq("job_listing"))
+        .filter(wp_posts::post_status.eq("publish"))
+        .filter(wp_posts::ID.eq(post_id))
+        .first(&state.get().unwrap())
+        .optional()
+        .unwrap()
+        .map(|post: Post| Json(PostResponse::from(&post)))
 }
