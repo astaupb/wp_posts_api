@@ -1,7 +1,7 @@
 [package]
 name = "asta-jobboerse-api"
 description = "Rocket API for the WP Job Manager Plugin running on asta.upb.de"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Leon Tappe <ltappe@mail.uni-paderborn.de>"]
 homepage = "https://asta.upb.de/"
 repository = "https://git.upb.de/ltappe/asta-jobboerse-api.git"
