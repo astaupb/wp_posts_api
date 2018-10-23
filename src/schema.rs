@@ -1,7 +1,7 @@
 table! {
     wp_posts (ID) {
-        ID -> Unsigned<BigInt>,
-        post_author -> Unsigned<BigInt>,
+        ID -> Unsigned<Integer>,
+        post_author -> Unsigned<Integer>,
         post_date -> Datetime,
         //post_date_gmt -> Nullable<Datetime>,
         post_content -> Text,
@@ -17,11 +17,11 @@ table! {
         post_modified -> Datetime,
         //post_modified_gmt -> Nullable<Datetime>,
         post_content_filtered -> VarChar,
-        post_parent -> Unsigned<BigInt>,
+        post_parent -> Unsigned<Integer>,
         guid -> VarChar,
         menu_order -> Integer,
         post_type -> VarChar,
         post_mime_type -> VarChar,
-        comment_count -> BigInt,
+        comment_count -> Integer,
     }
 }

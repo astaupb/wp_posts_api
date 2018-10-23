@@ -7,8 +7,8 @@ use chrono::naive::NaiveDateTime;
 #[table_name = "wp_posts"]
 #[primary_key("ID")]
 pub struct Post {
-    id: u64,
-    post_author: u64,
+    id: u32,
+    post_author: u32,
     post_date: NaiveDateTime,
     //post_date_gmt: Option<NaiveDateTime>,
     post_content: String,
@@ -24,24 +24,23 @@ pub struct Post {
     post_modified: NaiveDateTime,
     //post_modified_gmt: Option<NaiveDateTime>,
     post_content_filtered: String,
-    post_parent: u64,
+    post_parent: u32,
     guid: String,
     menu_order: i32,
     post_type: String,
     post_mime_type: String,
-    comment_count: i64,
+    comment_count: i32,
 }
 
 #[derive(Debug, Serialize)]
 pub struct PostResponse {
-    id: u64,
+    id: u32,
     date: NaiveDateTime,
     modified: NaiveDateTime,
     content: String,
     title: String,
     excerpt: String,
     name: String,
-    
 }
 
 impl<'a> From<&'a Post> for PostResponse {
