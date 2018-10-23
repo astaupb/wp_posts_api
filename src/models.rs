@@ -4,12 +4,11 @@ use chrono::naive::NaiveDateTime;
 #[derive(Identifiable, Queryable, Debug, Serialize)]
 #[table_name = "wp_posts"]
 #[primary_key("ID")]
-
 pub struct Post {
     id: u64,
     post_author: u64,
-    post_date: NaiveDateTime,
-    post_date_gmt: NaiveDateTime,
+    post_date: Option<NaiveDateTime>,
+    post_date_gmt: Option<NaiveDateTime>,
     post_content: String,
     post_title: String,
     post_excerpt: String,
@@ -20,8 +19,8 @@ pub struct Post {
     post_name: String,
     to_ping: String,
     pinged: String,
-    post_modified: NaiveDateTime,
-    post_modified_gmt: NaiveDateTime,
+    post_modified: Option<NaiveDateTime>,
+    post_modified_gmt: Option<NaiveDateTime>,
     post_content_filtered: String,
     post_parent: u64,
     guid: String,
