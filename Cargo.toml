@@ -6,7 +6,6 @@ authors = ["Leon Tappe <ltappe@mail.uni-paderborn.de>"]
 homepage = "https://asta.upb.de/"
 repository = "https://git.upb.de/ltappe/asta-jobboerse-api.git"
 license = "AGPL-3.0-or-later"
-license-file = "./LICENSE"
 
 [dependencies]
 diesel = {version = "1.3.3", features = ['mysql', 'r2d2', 'chrono']}
