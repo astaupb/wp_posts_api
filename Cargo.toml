@@ -1,12 +1,17 @@
 [package]
 name = "asta-jobboerse-api"
+description = "Rocket API for the WP Job Manager Plugin running on asta.upb.de"
 version = "0.1.0"
 authors = ["Leon Tappe <ltappe@mail.uni-paderborn.de>"]
+homepage = "https://asta.upb.de/"
+repository = "https://git.upb.de/ltappe/asta-jobboerse-api.git"
+license = "AGPLv3"
+license-file = "./LICENSE"
 
 [dependencies]
 diesel = {version = '*', features = ['mysql', 'r2d2', 'chrono']}
-r2d2 = {version = '*'}
-chrono = {version = '*'}
+r2d2 = "*"
+chrono = "*"
 serde = "*"
 serde_json = "*"
 serde_derive = "*"
