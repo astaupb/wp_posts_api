@@ -1,0 +1,15 @@
+[package]
+name = "asta-jobboerse-api"
+version = "0.1.0"
+authors = ["Leon Tappe <ltappe@mail.uni-paderborn.de>"]
+
+[dependencies]
+diesel = {version = '*', features = ['mysql', 'r2d2', 'chrono']}
+r2d2 = {version = '*'}
+chrono = {version = '*'}
+serde = "*"
+serde_json = "*"
+serde_derive = "*"
+rocket = "*"
+rocket_contrib = "*"
+rocket_codegen = "*"
