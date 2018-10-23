@@ -30,6 +30,7 @@ fn get_posts(state: State<Pool<ConnectionManager<MysqlConnection>>>) -> Json<Vec
     Json(
         wp_posts::table
             .select(wp_posts::all_columns)
+            .filter(wp_posts::post_type.eq("job_listing"))
             .load(&state.get().unwrap())
             .unwrap(),
     )
