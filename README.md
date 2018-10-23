@@ -2,7 +2,7 @@
 
 Stellt eine API für die AStA Jobbörse bereit (https://asta.upb.de/jobboerse/).
 
-Die Jobpostings werden in der Wordpress Datenbank aus der wp_posts Tabelle gelesen, wohin sie durch das "WP Job Manager" (https://wpjobmanager.com/) gelangt sind.
+Die Jobpostings werden in der Wordpress Datenbank aus der wp_posts Tabelle gelesen, wohin sie durch das "WP Job Manager" Plugin (https://wpjobmanager.com/) gelangt sind.
 
 Geschrieben in Rust mit Rocket und Diesel
 
