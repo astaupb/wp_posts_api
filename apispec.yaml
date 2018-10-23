@@ -1,0 +1,97 @@
+openapi: 3.0.1
+info:
+  description: 'Spezifikation für die Rocket API zur AStA Jobbörse'
+  version: 0.1.1
+  title: 'AStA Jobbörse API'
+  contact:
+    email: ltappe@mail.upb.de
+  license:
+    name: AGPLv3
+    url: 'https://www.gnu.org/licenses/agpl-3.0.html'
+paths:
+  '/':
+    get:
+      operationId: getPosts
+      summary: 'Get all job postings'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+                example:
+                  - { id: 1,
+                      author: 12,
+                      date: '1900-01-01 00:00:00',
+                      modified:   '1900-01-01 00:00:00',
+                      content: 'Weitere Informationen findest Du <a href="https://asta.uni-paderborn.de/wp-content/uploads/xxxx/yy/Stellenausschreibung-*.pdf">hier.</a>',
+                      title: 'Programmierer (m/w) gesucht',
+                      excerpt: 'Weitere Informationen [...]'
+                  }
+                  - { id: 2,
+                      author: 12, 
+                      date: '1900-01-01 00:00:00',
+                      modified:   '1900-01-01 00:00:00',
+                      content: 'Weitere Informationen findest Du <a href="https://asta.uni-paderborn.de/wp-content/uploads/xxxx/yy/Stellenausschreibung-*.pdf">hier.</a>',
+                      title: 'Programmierer (m/w) gesucht',
+                      excerpt: 'Weitere Informationen [...]'
+                  }
+        '500':
+          $ref: '#/components/responses/ServerError'
+  '/{post_id}':
+    get:
+      operationId: getPost
+      summary: 'Get a single post'
+      parameters:
+        - in: path
+          name: post_id
+          description: 'The ID of the job (as in database id _and_ id from the JSON)'
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Post'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
+servers:
+  - url: 'https://asta.upb.de/jobboerse_api'
+    description: Backend
+components:
+  responses:
+    NotFound:
+      description: '404 - Not Found'
+    ServerError:
+      description: '500 - Internal Server Error - Most likely a database problem'
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        author:
+          type: integer
+        date:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        content:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: string
+        name:
+          type: string
+        
+          
