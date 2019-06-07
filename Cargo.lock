@@ -6,21 +6,6 @@ version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "asta-jobboerse-api"
-version = "0.1.2"
-dependencies = [
- "chrono 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "diesel 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket_codegen 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket_contrib 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "rocket_cors 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde 1.0.92 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde_derive 1.0.92 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde_json 1.0.39 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
 name = "atty"
 version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1009,6 +994,21 @@ dependencies = [
 name = "winapi-x86_64-pc-windows-gnu"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "wp_posts_api"
+version = "0.1.2"
+dependencies = [
+ "chrono 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "diesel 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket_codegen 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket_contrib 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rocket_cors 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde 1.0.92 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_derive 1.0.92 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_json 1.0.39 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "ws2_32-sys"

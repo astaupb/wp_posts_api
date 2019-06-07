@@ -2,9 +2,9 @@
 #[macro_use]
 extern crate rocket;
 
-extern crate asta_jobboerse_api;
+extern crate wp_posts_api;
 
-use asta_jobboerse_api::{
+use wp_posts_api::{
     pool::pool,
     cors::cors,
     get::*,
@@ -12,7 +12,7 @@ use asta_jobboerse_api::{
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![get_posts, get_post])
+        .mount("/", routes![get_posts, get_full_post])
         .manage(pool())
         .attach(cors())
         .launch();

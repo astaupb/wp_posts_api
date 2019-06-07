@@ -1,10 +1,10 @@
 [package]
-name = "asta-jobboerse-api"
-description = "Rocket API for the WP Job Manager Plugin running on asta.upb.de"
+name = "wp_posts_api"
+description = "Rocket API for Wordpress Postings"
 version = "0.1.2"
-authors = ["Leon Tappe <ltappe@mail.uni-paderborn.de>"]
+authors = ["Leon Tappe <ltappe@mail.uni-paderborn.de>", "Gerrit Pape <papeg@mail.uni-paderborn.de"]
 homepage = "https://asta.upb.de/"
-repository = "https://git.upb.de/ltappe/asta-jobboerse-api.git"
+repository = "https://git.upb.de/asta/wp_posts_api.git"
 license = "AGPL-3.0-or-later"
 
 [dependencies]

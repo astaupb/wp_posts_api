@@ -3,37 +3,33 @@ use rocket::State;
 use rocket_contrib::json::Json;
 use crate::{
     pool::ConnectionPool,
-    schema::wp_posts,
-    models::{
-        Post, PostResponse, 
+    models::Post,
+    schema::*,
+    response::{
+        FullPostResponse, ShortPostResponse,
     },
 };
 
 #[get("/")]
-pub fn get_posts(state: State<ConnectionPool>) -> Json<Vec<PostResponse>> {
+pub fn get_posts(state: State<ConnectionPool>) -> Json<Vec<ShortPostResponse>> {
     Json(
         wp_posts::table
-            .select(wp_posts::all_columns)
-            .filter(wp_posts::post_type.eq("job_listing"))
-            .filter(wp_posts::post_status.eq("publish"))
-            .order(wp_posts::post_date.desc())
-            .load(&state.get().unwrap())
-            .unwrap()
-            .iter()
-            .map(|post: &Post| PostResponse::from(post: &Post))
-            .collect(),
+        .select((wp_posts::ID, wp_posts::post_date, wp_posts::post_modified, wp_posts::post_title, wp_posts::post_name))
+        .load(&state.get().unwrap())
+        .unwrap()
+        .iter()
+        .map(ShortPostResponse::from)
+        .collect()
     )
 }
 
-#[get("/<post_id>")]
-pub fn get_post(state: State<ConnectionPool>, post_id: u32) -> Option<Json<PostResponse>> {
+#[get("/<id>")]
+pub fn get_full_post(state: State<ConnectionPool>, id: u32) -> Option<Json<FullPostResponse>> {
     wp_posts::table
         .select(wp_posts::all_columns)
-        .filter(wp_posts::post_type.eq("job_listing"))
-        .filter(wp_posts::post_status.eq("publish"))
-        .filter(wp_posts::ID.eq(post_id))
+        .filter(wp_posts::ID.eq(id))
         .first(&state.get().unwrap())
         .optional()
         .unwrap()
-        .map(|post: Post| Json(PostResponse::from(&post)))
+        .map(|post: Post| Json(FullPostResponse::from(post)))
 }
